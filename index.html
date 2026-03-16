@@ -253,52 +253,18 @@
         );
 
         const WorksView = () => {
-          const [filter, setFilter] = useState('All');
-
-          const categories = [
-            { id: 'All', label: '全部作品' },
-            { id: 'Game Demo', label: '完整游戏 Demo' },
-            { id: 'Digital Art', label: '个人数媒作品' },
-            { id: 'Professional', label: '商业实习项目' },
-            { id: 'Tech Art', label: '渲染与材质' }
-          ];
-
           const projects = [
             { 
-              title: "“城市游牧者”VR互动游戏", category: "Game Demo", type: "interactive", tag: "Unity / VR", role: "交互设计师", color: "#00ff99", shadow: "#ff0055",
-              desc: "结合实体灯光装置与虚拟现实的互动游戏。荣获香港数字艺术设计大赛三等奖。"
+              title: "AIGC 3D 工作流展示", tag: "AI / 3D Pipeline", role: "技术美术", color: "#00ff99", shadow: "#ff0055",
+              desc: "AgentSkill AIGC 3D 工作流展示，涵盖 AI 图片生成与 3D 模型生成管线。",
+              video: "assets/AgentSkill AIGC3D工作流展示.mp4"
             },
             { 
-              title: "“幕启：后台行纪” 沉浸式叙事", category: "Game Demo", type: "video", tag: "Unity / VR", role: "核心开发(美术/程序)", color: "#ffe600", shadow: "#00ccff",
-              desc: "以京剧《霸王别姬》为背景，主导开发了一款沉浸式 VR 数字叙事体验。获系内最高分。"
-            },
-            { 
-              title: "光影互动装置《BoidsLight》", category: "Digital Art", type: "interactive", tag: "投影 / 装置", role: "新媒体艺术", color: "#ff0055", shadow: "#00ff99",
-              desc: "入选 WePlay Expo 进行展出。结合硬件感应与视觉投影的生成式互动艺术装置。"
-            },
-            { 
-              title: "“海马体”数字互动艺术展", category: "Digital Art", type: "interactive", tag: "Unity / AR / Shader", role: "AR 设计", color: "#ff0055", shadow: "#ffe600",
-              desc: "采用 Unity Vuforia 设计增强现实功能，并开发着色器特效，提升展陈交互性。"
-            },
-            { 
-              title: "杭州灵隐寺宣传视频", category: "Professional", type: "video", tag: "UE5 / Sequence", role: "技术美术", color: "#00ccff", shadow: "#ff0055",
-              desc: "实习项目：运用虚幻引擎（Unreal Engine）制作杭州灵隐寺项目宣传视频。"
-            },
-            { 
-              title: "数字孪生全息投影构建", category: "Professional", type: "interactive", tag: "UE / 数字孪生", role: "技术美术", color: "#00ccff", shadow: "#00ff99",
-              desc: "宁夏数字孪生项目：负责基于虚幻引擎的数字展厅场景构建，对全息投影材质进行测试与调试。"
-            },
-            { 
-              title: "复杂模型毛发材质渲染", category: "Tech Art", type: "image", tag: "Blender / 材质烘焙", role: "3D 美术", color: "#ffe600", shadow: "#ff0055",
-              desc: "针对窗帘、地毯等复杂模型进行毛发材质测试与烘焙渲染，优化引擎端性能与表现。"
-            },
-            { 
-              title: "网页端场景贴图烘焙", category: "Tech Art", type: "image", tag: "TA / 烘焙", role: "技术美术", color: "#ffe600", shadow: "#00ccff",
-              desc: "上海亿方游网络实习项目：负责“城市漫游”网页端场景的贴图自动化烘焙工作。"
+              title: "Unity Shader 效果展示", tag: "Unity / Shader", role: "技术美术", color: "#ffe600", shadow: "#00ccff",
+              desc: "Unity Shader 特效展示，包含多种自定义着色器与视觉效果。",
+              video: "assets/UnityShader效果展示.mp4"
             }
           ];
-
-          const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
           return (
             <div className="page-enter">
@@ -310,34 +276,21 @@
                   网盘完整作品集 <Icon name="ArrowRight" size={16}/>
                 </a>
               </div>
-
-              {/* 分类过滤器适配 */}
-              <div className="flex flex-wrap gap-2 md:gap-4 mb-8 md:mb-10">
-                {categories.map(cat => (
-                  <button 
-                    key={cat.id}
-                    onClick={() => setFilter(cat.id)}
-                    className={`px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-black uppercase tracking-widest border-2 transition-all ${
-                      filter === cat.id 
-                      ? 'bg-[#00ff99] text-black border-[#00ff99] shadow-[3px_3px_0px_#ff0055] translate-x-1 -translate-y-1' 
-                      : 'bg-transparent text-gray-400 border-gray-600 hover:border-white hover:text-white'
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 transition-all duration-500">
-                {filteredProjects.map((project, i) => (
-                  <article key={`${project.title}-${i}`} className="group cursor-pointer bg-[#111] border-4 border-white flex flex-col transition-all duration-300 hover:-translate-y-2 hover:translate-x-1 md:hover:-translate-y-4 md:hover:translate-x-2 animate-[slideUpFade_0.5s_ease-out]" style={{ boxShadow: `-6px 6px 0px 0px ${project.shadow}` }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 transition-all duration-500">
+                {projects.map((project, i) => (
+                  <article key={`${project.title}-${i}`} className="group bg-[#111] border-4 border-white flex flex-col transition-all duration-300 hover:-translate-y-2 hover:translate-x-1 md:hover:-translate-y-4 md:hover:translate-x-2 animate-[slideUpFade_0.5s_ease-out]" style={{ boxShadow: `-6px 6px 0px 0px ${project.shadow}` }}>
                     
-                    <div className="h-40 md:h-48 border-b-4 border-white relative overflow-hidden bg-[#222] flex items-center justify-center group-hover:bg-[#333] transition-colors">
-                      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px] mix-blend-overlay" />
-                      {project.type === 'video' && <Icon name="Play" size={48} className="text-white opacity-50 group-hover:scale-125 group-hover:text-[#00ff99] transition-all" />}
-                      {project.type === 'image' && <Icon name="ImageIcon" size={48} className="text-white opacity-50 group-hover:scale-125 group-hover:text-[#ffe600] transition-all" />}
-                      {project.type === 'interactive' && <Icon name="MonitorPlay" size={48} className="text-white opacity-50 group-hover:scale-125 group-hover:text-[#ff0055] transition-all" />}
-                      <span className="absolute bottom-2 right-2 text-[10px] md:text-xs font-black px-2 py-1 bg-black text-white">{project.type.toUpperCase()}</span>
+                    <div className="border-b-4 border-white relative overflow-hidden bg-black">
+                      <video 
+                        className="w-full aspect-video object-cover"
+                        controls
+                        preload="metadata"
+                        playsInline
+                      >
+                        <source src={project.video} type="video/mp4" />
+                      </video>
+                      <span className="absolute top-2 right-2 text-[10px] md:text-xs font-black px-2 py-1 bg-black text-white border border-white/30 z-10">VIDEO</span>
                     </div>
 
                     <div className="p-4 md:p-6 flex-1 flex flex-col">
@@ -345,7 +298,6 @@
                         <span className="px-2 py-1 text-black font-black text-[10px] md:text-xs uppercase border-2 border-black whitespace-nowrap" style={{ backgroundColor: project.color }}>
                           {project.tag}
                         </span>
-                        <span className="text-[10px] md:text-xs font-bold text-gray-500 uppercase whitespace-nowrap">{project.category}</span>
                       </div>
                       <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 leading-tight group-hover:text-[#00ff99] transition-colors">{project.title}</h3>
                       <p className="text-gray-400 text-xs md:text-sm mb-4 md:mb-6 flex-1">{project.desc}</p>
@@ -496,7 +448,7 @@
                       <ul className="list-disc list-inside text-gray-300 space-y-1.5 md:space-y-2 text-xs md:text-sm marker:text-[#ffe600] leading-relaxed">
                         <li>广告 Logo 的 AR 动画设计、张江城市规划 AR 设计和邀请函设计，及线下展览《烟云灵梦》AR 设计。</li>
                         <li>使用 Blender 针对窗帘、地毯等复杂模型进行毛发材质测试与烘焙渲染。</li>
-                        <li>负责“城市漫游”网页端场景的贴图烘焙工作。</li>
+                        <li>负责"城市漫游"网页端场景的贴图烘焙工作。</li>
                       </ul>
                     </div>
                   </div>
@@ -510,7 +462,7 @@
                       <div className="flex items-center gap-2 text-[#ffe600] mb-2">
                         <Icon name="Zap" size={18} className="md:w-[20px] md:h-[20px]" /> <span className="font-black text-lg md:text-xl tracking-widest">一等奖</span>
                       </div>
-                      <h4 className="font-bold text-white mb-1 md:mb-2 text-base md:text-lg">第十届“汇创青春”大赛</h4>
+                      <h4 className="font-bold text-white mb-1 md:mb-2 text-base md:text-lg">第十届"汇创青春"大赛</h4>
                       <p className="text-xs md:text-sm text-gray-500 font-bold">2025年</p>
                     </div>
                     
